@@ -1,0 +1,38 @@
+The goal of this exercise is to convert a string to a new string where each character in the new string is "(" if that character appears only once in the original string, or ")" if that character appears more than once in the original string. Ignore capitalization when determining if a character is a duplicate.
+
+Examples
+"din"      =>  "((("
+"recede"   =>  "()()()"
+"Success"  =>  ")())())"
+"(( @"     =>  "))((" 
+Notes
+Assertion messages may be unclear about what they display in some languages. If you read "...It Should encode XXX", the "XXX" is the expected result, not the input!
+
+SOLUTION
+
+function duplicateEncode(word) {
+  // we create an object to count how many times each letter appears in the string
+    const letterCollection = {};
+  
+  // we transform the string into an array
+    const wordAsArray = word.toLowerCase().split("");
+
+  // we add each letter to the object that holds the occurences
+    wordAsArray.forEach((letter) => (letterCollection[letter] ? (letterCollection[letter] += 1) : (letterCollection[letter] = 1)));
+
+  // we replace characters based on how many times are found in the string
+    for (let i = 0; i < wordAsArray.length; i++) {
+        const refrence = wordAsArray[i];
+
+        if (letterCollection[refrence] > 1) {
+            wordAsArray[i] = ")";
+        }
+
+        if (letterCollection[refrence] === 1) {
+            wordAsArray[i] = "(";
+        }
+    }
+
+  // we transform the array back into a string
+    return wordAsArray.join("");
+}
