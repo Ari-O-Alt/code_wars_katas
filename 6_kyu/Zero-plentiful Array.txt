@@ -1,0 +1,29 @@
+An array is called zero-plentiful if it contains at least one 0 and every sequence of 0s is of length at least 4. Your task is to return the number of zero sequences if the given array is zero-plentiful else 0.
+
+SOLUTION
+
+function zeroPlentiful(arr) {
+    // variable holding the number of sequences
+    let sequences = 0;
+    // variable holding number of consecutive zeros
+    let consecutiveZeros = 0;
+    // we loop over each array element
+    for (let i = 0; i <= arr.length; i++) {
+        // it the element is zero, we add it to the sequence
+        if (arr[i] === 0) consecutiveZeros++;
+        // if the element is not zero
+        else {
+            // is the sequence's length is bigger than 0 but smaller than 4
+            if (consecutiveZeros !== 0 && consecutiveZeros < 4) {
+                return 0;
+            }
+            // if the sequence's length is bigger than 3
+            if (consecutiveZeros > 3) {
+                sequences++;
+            }
+          // if the first 2 ifs are not true, reset consecutiveZeros
+            consecutiveZeros = 0;
+        }
+    }
+    return sequences;
+}
